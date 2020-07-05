@@ -8,6 +8,8 @@ DAILYWAGE=0
 PARTTIME=0
 TOTALDAYS=20
 TOTALWAGE=0
+TOTALHOURS=0
+TOTALWORKINGHOUR=100
 
 dailywage(){
         DAILYWAGE=$(($WAGE * $HOUR))
@@ -29,20 +31,25 @@ attendance(){
                 	then
                         	dailywage
 				TOTALWAGE=$(($DAILYWAGE+$TOTALWAGE))
+				TOTALHOURS=$(($TOTALHOURS+$HOUR))
                 	else
                         	partwage
 				TOTALWAGE=$(($PARTTIME+$TOTALWAGE))
+				TOTALHOURS=$(($TOTALHOURS+$(($HOUR / 2)) ))
         		fi
 		else
 			echo "Employee is Absent"
 	fi
 }
 
-for ((i=1 ; i<= $TOTALDAYS ;i++))
+day=1
+while [ $(($day<=$TOTALDAYS)) -eq $(($TOTALHOURS<=$TOTALWORKINGHOUR)) ]
 do
-	echo -n "day $i = "
+	echo -n "day $day = "
 	attendance
+	day=$(($day+1))
 done
 
+echo "Total working hours are=$TOTALHOURS"
 echo "Total wage of a month=$TOTALWAGE"
 
