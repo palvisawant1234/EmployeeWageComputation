@@ -59,9 +59,12 @@ while [ $(($day<=$TOTALDAYS)) -eq $(($TOTALHOURS<=$TOTALWORKINGHOUR)) ]
 do
 	echo -n "day $day = "
 	attendance
+	dailywage[$day]=$TOTALWAGE
 	day=$(($day+1))
 done
 
+echo Stored daily wages are:
+echo "${dailywage[*]}"
 echo "Total working hours are=$TOTALHOURS"
 echo "Total wage of a month=$TOTALWAGE"
 
