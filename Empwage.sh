@@ -63,8 +63,12 @@ do
 	day=$(($day+1))
 done
 
-echo Stored daily wages are:
-echo "${dailywage[*]}"
+echo Stored daily wages along with day are:
+for((i=1 ; i<=$(($day-1)) ; i++))
+do
+echo "dailywage[$i] : ${dailywage[i]}"
+done
+
 echo "Total working hours are=$TOTALHOURS"
 echo "Total wage of a month=$TOTALWAGE"
 
