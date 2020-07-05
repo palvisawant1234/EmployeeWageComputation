@@ -13,13 +13,25 @@ TOTALWORKINGHOUR=100
 
 dailywage(){
         DAILYWAGE=$(($WAGE * $HOUR))
-        echo "Daily Employee Wage is= $DAILYWAGE"
+        echo -n "Full time Wage is= $DAILYWAGE   "
 }
 
 partwage(){
 	TIME=$(($HOUR / 2))
 	PARTTIME=$(($TIME * $WAGE))
-	echo "Part time Employee Wage is $PARTTIME"
+	echo -n "Part time Wage= $PARTTIME   "
+}
+
+getworkhours(){
+hour=$1
+TOTALHOURS=$(($TOTALHOURS+$hour))
+echo "     Total hours=$TOTALHOURS   "
+}
+
+gettotalwage(){
+wage=$1
+TOTALWAGE=$(($wage+$TOTALWAGE))
+echo -n "Total wage=$TOTALWAGE"
 }
 
 attendance(){
@@ -30,12 +42,12 @@ attendance(){
 		        if [ $RD -eq 1 ]
                 	then
                         	dailywage
-				TOTALWAGE=$(($DAILYWAGE+$TOTALWAGE))
-				TOTALHOURS=$(($TOTALHOURS+$HOUR))
+				gettotalwage $DAILYWAGE
+				getworkhours $HOUR
                 	else
                         	partwage
-				TOTALWAGE=$(($PARTTIME+$TOTALWAGE))
-				TOTALHOURS=$(($TOTALHOURS+$(($HOUR / 2)) ))
+				gettotalwage $PARTTIME
+				getworkhours $(($HOUR / 2)) 
         		fi
 		else
 			echo "Employee is Absent"
