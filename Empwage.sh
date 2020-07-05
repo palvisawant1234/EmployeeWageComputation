@@ -17,7 +17,6 @@ partwage(){
 	PARTTIME=$(($TIME * $WAGE))
 	echo "Part time Employee Wage is $PARTTIME"
 }
-partwage
 
 attendance(){
 	R=$((RANDOM % 2))
